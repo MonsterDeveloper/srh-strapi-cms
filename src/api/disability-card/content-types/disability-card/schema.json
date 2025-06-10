@@ -1,0 +1,65 @@
+{
+  "kind": "collectionType",
+  "collectionName": "disability_cards",
+  "info": {
+    "singularName": "disability-card",
+    "pluralName": "disability-cards",
+    "displayName": "Disability Card"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "mobility",
+        "visual",
+        "hearing",
+        "cognitive",
+        "chronic_illness",
+        "mental_health",
+        "temporary"
+      ]
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "active",
+        "expired",
+        "pending",
+        "suspended"
+      ]
+    },
+    "issuingCard": {
+      "type": "string"
+    },
+    "number": {
+      "type": "string",
+      "required": true
+    },
+    "expiryDate": {
+      "type": "date"
+    },
+    "file": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "ticket": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::ticket.ticket",
+      "mappedBy": "disabilityCard"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "disabilityCards"
+    }
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tickets",
+  "info": {
+    "singularName": "ticket",
+    "pluralName": "tickets",
+    "displayName": "Ticket"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "price": {
+      "type": "decimal"
+    },
+    "refundPolicy": {
+      "type": "text"
+    },
+    "format": {
+      "type": "enumeration",
+      "enum": [
+        "physical",
+        "digital",
+        "mobile"
+      ]
+    },
+    "zone": {
+      "type": "string"
+    },
+    "seat": {
+      "type": "string"
+    },
+    "ticketType": {
+      "type": "enumeration",
+      "enum": [
+        "regular",
+        "student",
+        "senior",
+        "accessibility",
+        "companion"
+      ]
+    },
+    "event": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::event.event",
+      "inversedBy": "tickets"
+    },
+    "accessibilityFeatures": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::accessibility-feature.accessibility-feature",
+      "inversedBy": "tickets"
+    },
+    "accessibilityNeeds": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::accessibility-need.accessibility-need",
+      "inversedBy": "tickets"
+    },
+    "companion": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::companion.companion",
+      "inversedBy": "ticket"
+    },
+    "disabilityCard": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::disability-card.disability-card",
+      "inversedBy": "ticket"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "tickets"
+    }
+  }
+}

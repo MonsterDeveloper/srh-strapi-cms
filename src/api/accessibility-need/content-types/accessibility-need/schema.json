@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "accessibility_needs",
+  "info": {
+    "singularName": "accessibility-need",
+    "pluralName": "accessibility-needs",
+    "displayName": "Accessibility Need"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "mobility",
+        "visual",
+        "hearing",
+        "cognitive",
+        "sensory",
+        "communication",
+        "dietary"
+      ]
+    },
+    "tickets": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::ticket.ticket",
+      "mappedBy": "accessibilityNeeds"
+    }
+  }
+}

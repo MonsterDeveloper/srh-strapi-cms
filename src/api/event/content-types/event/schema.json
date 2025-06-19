@@ -53,12 +53,10 @@
     "website": {
       "type": "string"
     },
-    "tags": {
-      "type": "json"
-    },
     "seatMaps": {
       "type": "media",
       "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files"
@@ -87,6 +85,9 @@
       "relation": "oneToMany",
       "target": "api::ticket.ticket",
       "mappedBy": "event"
+    },
+    "tags": {
+      "type": "string"
     }
   }
 }

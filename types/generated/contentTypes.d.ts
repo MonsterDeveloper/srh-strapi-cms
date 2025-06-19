@@ -588,7 +588,7 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     seatMaps: Schema.Attribute.Media<'images' | 'files', true>;
     startTime: Schema.Attribute.DateTime;
-    tags: Schema.Attribute.JSON;
+    tags: Schema.Attribute.String;
     tickets: Schema.Attribute.Relation<'oneToMany', 'api::ticket.ticket'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &

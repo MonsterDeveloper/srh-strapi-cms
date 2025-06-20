@@ -467,6 +467,9 @@ export interface ApiDisabilityCardDisabilityCard
     draftAndPublish: false;
   };
   attributes: {
+    cardStatus: Schema.Attribute.Enumeration<
+      ['active', 'expired', 'pending', 'suspended']
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -481,9 +484,6 @@ export interface ApiDisabilityCardDisabilityCard
       Schema.Attribute.Private;
     number: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
-    status: Schema.Attribute.Enumeration<
-      ['active', 'expired', 'pending', 'suspended']
-    >;
     ticket: Schema.Attribute.Relation<'oneToOne', 'api::ticket.ticket'>;
     type: Schema.Attribute.Enumeration<
       [
@@ -615,6 +615,9 @@ export interface ApiLocationLocation extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     locationOverview: Schema.Attribute.Text;
+    locationStatus: Schema.Attribute.Enumeration<
+      ['active', 'inactive', 'maintenance', 'closed']
+    >;
     media: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios',
       true
@@ -623,9 +626,6 @@ export interface ApiLocationLocation extends Struct.CollectionTypeSchema {
     openingHours: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     size: Schema.Attribute.String;
-    status: Schema.Attribute.Enumeration<
-      ['active', 'inactive', 'maintenance', 'closed']
-    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

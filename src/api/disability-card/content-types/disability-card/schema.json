@@ -22,7 +22,7 @@
         "temporary"
       ]
     },
-    "status": {
+    "cardStatus": {
       "type": "enumeration",
       "enum": [
         "active",

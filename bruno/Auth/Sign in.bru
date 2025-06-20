@@ -1,0 +1,18 @@
+meta {
+  name: Sign in
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:1337/api/auth/local
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "identifier": "test@test.com",
+    "password": "123123123"
+  }
+}

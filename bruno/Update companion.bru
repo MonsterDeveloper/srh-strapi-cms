@@ -1,0 +1,19 @@
+meta {
+  name: Update companion
+  type: http
+  seq: 2
+}
+
+put {
+  url: http://localhost:1337/api/companions/bv76ymclo9g7v5xp8gveglqo
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "data": {
+      "firstName": "test bruno null"
+    }
+  }
+}

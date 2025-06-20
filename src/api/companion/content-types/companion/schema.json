@@ -4,7 +4,8 @@
   "info": {
     "singularName": "companion",
     "pluralName": "companions",
-    "displayName": "Companion"
+    "displayName": "Companion",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -27,13 +28,11 @@
     "file": {
       "type": "media",
       "multiple": false,
+      "required": false,
       "allowedTypes": [
         "files",
         "images"
       ]
-    },
-    "number": {
-      "type": "string"
     },
     "primaryLanguage": {
       "type": "relation",

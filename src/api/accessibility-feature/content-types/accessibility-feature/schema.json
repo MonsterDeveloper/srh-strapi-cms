@@ -4,7 +4,8 @@
   "info": {
     "singularName": "accessibility-feature",
     "pluralName": "accessibility-features",
-    "displayName": "Accessibility Feature"
+    "displayName": "Accessibility Feature",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -39,6 +40,14 @@
       "relation": "manyToMany",
       "target": "api::location.location",
       "mappedBy": "accessibilityFeatures"
+    },
+    "icon": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
     }
   }
 }

@@ -56,12 +56,6 @@
       "target": "api::accessibility-feature.accessibility-feature",
       "inversedBy": "tickets"
     },
-    "accessibilityNeeds": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::accessibility-need.accessibility-need",
-      "inversedBy": "tickets"
-    },
     "companion": {
       "type": "relation",
       "relation": "oneToOne",

@@ -377,6 +377,7 @@ export interface ApiAccessibilityFeatureAccessibilityFeature
   extends Struct.CollectionTypeSchema {
   collectionName: 'accessibility_features';
   info: {
+    description: '';
     displayName: 'Accessibility Feature';
     pluralName: 'accessibility-features';
     singularName: 'accessibility-feature';
@@ -389,6 +390,7 @@ export interface ApiAccessibilityFeatureAccessibilityFeature
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Text;
+    icon: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -411,52 +413,10 @@ export interface ApiAccessibilityFeatureAccessibilityFeature
   };
 }
 
-export interface ApiAccessibilityNeedAccessibilityNeed
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'accessibility_needs';
-  info: {
-    displayName: 'Accessibility Need';
-    pluralName: 'accessibility-needs';
-    singularName: 'accessibility-need';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    description: Schema.Attribute.Text;
-    icon: Schema.Attribute.Media<'images'>;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::accessibility-need.accessibility-need'
-    > &
-      Schema.Attribute.Private;
-    name: Schema.Attribute.String & Schema.Attribute.Required;
-    publishedAt: Schema.Attribute.DateTime;
-    tickets: Schema.Attribute.Relation<'manyToMany', 'api::ticket.ticket'>;
-    type: Schema.Attribute.Enumeration<
-      [
-        'mobility',
-        'visual',
-        'hearing',
-        'cognitive',
-        'sensory',
-        'communication',
-        'dietary',
-      ]
-    >;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiCompanionCompanion extends Struct.CollectionTypeSchema {
   collectionName: 'companions';
   info: {
+    description: '';
     displayName: 'Companion';
     pluralName: 'companions';
     singularName: 'companion';
@@ -479,7 +439,6 @@ export interface ApiCompanionCompanion extends Struct.CollectionTypeSchema {
       'api::companion.companion'
     > &
       Schema.Attribute.Private;
-    number: Schema.Attribute.String;
     primaryLanguage: Schema.Attribute.Relation<
       'manyToOne',
       'api::language.language'
@@ -726,10 +685,6 @@ export interface ApiTicketTicket extends Struct.CollectionTypeSchema {
     accessibilityFeatures: Schema.Attribute.Relation<
       'manyToMany',
       'api::accessibility-feature.accessibility-feature'
-    >;
-    accessibilityNeeds: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::accessibility-need.accessibility-need'
     >;
     companion: Schema.Attribute.Relation<
       'oneToOne',
@@ -1295,7 +1250,6 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::accessibility-feature.accessibility-feature': ApiAccessibilityFeatureAccessibilityFeature;
-      'api::accessibility-need.accessibility-need': ApiAccessibilityNeedAccessibilityNeed;
       'api::companion.companion': ApiCompanionCompanion;
       'api::disability-card.disability-card': ApiDisabilityCardDisabilityCard;
       'api::event.event': ApiEventEvent;

@@ -19,8 +19,24 @@ export interface DisabilityCard {
   expiryDate: string
   issuingCard: string
   file?: {
-    url: string
+    id: number
+    documentId: string
     name: string
+    alternativeText?: string
+    caption?: string
+    width?: number
+    height?: number
+    formats?: any
+    hash: string
+    ext: string
+    mime: string
+    size: number
+    url: string
+    previewUrl?: string
+    provider: string
+    provider_metadata?: any
+    createdAt: string
+    updatedAt: string
   }
   createdAt: string
   updatedAt: string

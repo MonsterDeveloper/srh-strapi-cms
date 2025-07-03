@@ -6,8 +6,9 @@ import { Badge } from '@/components/Badge'
 import { strapiServerAPI } from '@/lib/strapi-server'
 import { getStatusColor, getTypeLabel } from '@/lib/disability-card-utils'
 import { DisabilityCardActions } from '@/components/ui/disability-cards/DisabilityCardActions'
-import { RiAddLine, RiFileTextLine } from '@remixicon/react'
+import { RiAddLine, RiFileTextLine, RiFileDownloadLine } from '@remixicon/react'
 import { redirect } from 'next/navigation'
+import { STRAPI_API_URL } from '@/lib/strapi'
 
 export default async function DisabilityCardsPage() {
   const session = await getServerSession(authOptions)
@@ -75,6 +76,19 @@ export default async function DisabilityCardsPage() {
                     <div>
                       <span className="font-medium">Expires:</span> {new Date(card.expiryDate).toLocaleDateString()}
                     </div>
+                    {card.file && (
+                      <div className="flex items-center gap-2 pt-2">
+                        <RiFileDownloadLine className="h-4 w-4 text-blue-500" />
+                        <a
+                          href={STRAPI_API_URL + card.file.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-600 hover:text-blue-800 text-sm underline font-medium"
+                        >
+                          {card.file.name}
+                        </a>
+                      </div>
+                    )}
                   </div>
                 </div>
                 

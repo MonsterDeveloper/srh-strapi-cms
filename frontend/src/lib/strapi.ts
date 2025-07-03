@@ -6,7 +6,7 @@ import {
   User
 } from './strapi-types'
 
-const STRAPI_API_URL = process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://localhost:1337'
+export const STRAPI_API_URL = process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://localhost:1337'
 
 class StrapiAPI {
   private baseURL: string
@@ -104,12 +104,12 @@ class StrapiAPI {
 
   // Disability Cards
   async getDisabilityCards(userId?: number): Promise<StrapiResponse<DisabilityCard[]>> {
-    const filters = userId ? `?filters[user][id][$eq]=${userId}` : ''
+    const filters = userId ? `?filters[user][id][$eq]=${userId}&populate=file` : '?populate=file'
     return this.request<DisabilityCard[]>(`/disability-cards${filters}`)
   }
 
   async getDisabilityCard(id: string): Promise<StrapiResponse<DisabilityCard>> {
-    return this.request<DisabilityCard>(`/disability-cards/${id}`)
+    return this.request<DisabilityCard>(`/disability-cards/${id}?populate=file`)
   }
 
   async createDisabilityCard(data: Partial<DisabilityCard>): Promise<StrapiResponse<DisabilityCard>> {
@@ -154,6 +154,35 @@ class StrapiAPI {
 
   async getUserTickets(userId: number): Promise<StrapiResponse<Ticket[]>> {
     return this.request<Ticket[]>(`/tickets?filters[user][id][$eq]=${userId}&populate=*`)
+  }
+
+  // File upload
+  async uploadFile(file: File, ref?: string, refId?: string, field?: string): Promise<StrapiResponse<any>> {
+    const formData = new FormData()
+    formData.append('files', file)
+    
+    if (ref) formData.append('ref', ref)
+    if (refId) formData.append('refId', refId)
+    if (field) formData.append('field', field)
+
+    const url = `${this.baseURL}/api/upload`
+    const headers: Record<string, string> = {}
+
+    if (this.token) {
+      headers.Authorization = `Bearer ${this.token}`
+    }
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers,
+      body: formData,
+    })
+
+    if (!response.ok) {
+      throw new Error(`Upload failed: ${response.status} ${response.statusText}`)
+    }
+
+    return response.json()
   }
 
   // User profile

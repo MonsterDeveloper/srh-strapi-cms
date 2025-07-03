@@ -1,5 +1,5 @@
 export default ({ env }) => ({
-  watchIgnoreFiles: ["frontend/**/*"],
+  watchIgnoreFiles: ["**/frontend/**"],
   auth: {
     secret: env('ADMIN_JWT_SECRET'),
   },

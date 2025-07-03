@@ -59,12 +59,12 @@ class StrapiServerAPI {
 
   // Disability Cards
   async getDisabilityCards(userId?: number): Promise<StrapiResponse<DisabilityCard[]>> {
-    const filters = userId ? `?filters[user][id][$eq]=${userId}` : ''
+    const filters = userId ? `?filters[user][id][$eq]=${userId}&populate=file` : '?populate=file'
     return this.request<DisabilityCard[]>(`/disability-cards${filters}`)
   }
 
   async getDisabilityCard(id: string): Promise<StrapiResponse<DisabilityCard>> {
-    return this.request<DisabilityCard>(`/disability-cards/${id}`)
+    return this.request<DisabilityCard>(`/disability-cards/${id}?populate=file`)
   }
 
   async createDisabilityCard(data: Partial<DisabilityCard>): Promise<StrapiResponse<DisabilityCard>> {

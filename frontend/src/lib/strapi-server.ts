@@ -88,12 +88,12 @@ class StrapiServerAPI {
   }
 
   // Events
-  async getEvents(page = 1, pageSize = 25): Promise<StrapiResponse<Event[]>> {
-    return this.request<Event[]>(`/events?populate=*&pagination[page]=${page}&pagination[pageSize]=${pageSize}`)
+  async getEvents(page = 1, pageSize = 25, locale = 'en'): Promise<StrapiResponse<Event[]>> {
+    return this.request<Event[]>(`/events?populate=*&pagination[page]=${page}&pagination[pageSize]=${pageSize}&locale=${locale}`)
   }
 
-  async getEvent(id: string): Promise<StrapiResponse<Event>> {
-    return this.request<Event>(`/events/${id}?populate=*`)
+  async getEvent(id: string, locale = 'en'): Promise<StrapiResponse<Event>> {
+    return this.request<Event>(`/events/${id}?populate=*&locale=${locale}`)
   }
 
   // Tickets

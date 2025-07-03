@@ -2,20 +2,29 @@ import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
 import { authOptions } from '@/lib/auth'
 import { strapiServerAPI, type Event } from '@/lib/strapi-server'
-import { EventsList } from '@/components/ui/events/EventsList'
+import { EventsPageClient } from '@/components/ui/events/EventsPageClient'
 
-export default async function EventsPage() {
+interface EventsPageProps {
+  searchParams: Promise<{
+    locale?: string
+  }>
+}
+
+export default async function EventsPage({ searchParams }: EventsPageProps) {
   const session = await getServerSession(authOptions)
+  const resolvedSearchParams = await searchParams
   
   if (!session?.jwt) {
     redirect('/auth/sign-in')
   }
 
+  const locale = resolvedSearchParams.locale || 'en'
   let events: Event[] = []
   let error = null
 
   try {
-    const response = await strapiServerAPI.getEvents(1, 25)
+    const response = await strapiServerAPI.getEvents(1, 25, locale)
+    console.log(response)
     events = response.data
   } catch (err) {
     error = 'Failed to fetch events'
@@ -23,18 +32,11 @@ export default async function EventsPage() {
   }
 
   return (
-    <div className="space-y-6 p-6">
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Events</h1>
-      </div>
-
-      {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
-          {error}
-        </div>
-      )}
-
-      <EventsList initialEvents={events} />
-    </div>
+    <EventsPageClient 
+      initialEvents={events} 
+      initialLocale={locale}
+      initialError={error}
+      userToken={session.jwt}
+    />
   )
 }
